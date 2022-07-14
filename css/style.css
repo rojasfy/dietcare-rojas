@@ -744,6 +744,7 @@ section:nth-child(even) {
 
     html {
         font-size: 50%;
+        width: 450px;
     }
 
 }

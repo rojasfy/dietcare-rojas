@@ -2,6 +2,8 @@
 
 // evento: "submit"
 
+
+
 const formulario = document.getElementById("formCita");
 formulario.addEventListener("submit", solicitarCita);
 
@@ -27,17 +29,31 @@ function solicitarCita(e) {
         alert("Debes selecionar una fecha digitala");
         document.getElementById("datecita").focus();
     } else {
-        const div = document.createElement("div");
-        div.innerHTML = '<div class="box4 "><h4 >Buen día! Sr(a).' + ' ' + nombre.toUpperCase() + ' ' + ' su turno de atención es: <span>' + fecha + ' ' + ', </span> se agradece puntual asistencia.</h4></div>';
-        formulario.appendChild(div);
-        console.log(`nombre: ${nombre.toUpperCase()} / numero: ${celular} / email: ${email} / fecha: ${fecha}`)
+        addcita (nombre, celular, email, fecha);
+        mensajecita ()
+
+        function mensajecita () {
+            let lista = getlistacita ()
+            console.log(lista);
+            const div = document.createElement("div");
+            div.innerHTML = " "
+
+            for(let i=0; i<lista.length; i++){
+                div.innerHTML = '<div id="cita" class="box4 "><h4 >Buen día! Sr(a).' + ' ' + lista[i].paciente.toUpperCase() + ' ' + ' su turno de atención es: <span>' + lista[i].fechaCita + ' ' + ', </span> se agradece puntual asistencia.</h4></div>';
+                formulario.appendChild(div);
+
+                formulario.addEventListener("change", borrar);
+                function borrar(){
+                    return div.innerHTML = " "
+                }
+            }
+        }
         document.getElementById("namecita").value = "";
         document.getElementById("numbercita").value = "";
         document.getElementById("emailcita").value = "";
         document.getElementById("datecita").value = "";
         document.getElementById("namecita").focus()
-    }
-
+    } 
 }
 
 
