@@ -1,139 +1,217 @@
-
-
 // evento: "submit"
 
-
-
 const formulario = document.getElementById("formCita");
-formulario.addEventListener("submit", solicitarCita);
+const inputs = document.querySelectorAll("#formCita input");
+//formulario.addEventListener("submit", solicitarCita);
 
-function solicitarCita(e) {
-    e.preventDefault();
+const expresiones = {
+  name: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
+  number: /^\d{7,14}$/, // 7 a 14 numeros.
+  email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+  datetime:
+    /^((?:[0-9]{2})?[0-9]{2})\-(1[0-2]|0?[1-9])\-(3[01]|[12][0-9]|0?[1-9])T(2[0-3]|[01]?[0-9]):([0-5]?[0-9])$/,
+};
 
-    let nombre = document.getElementById("namecita").value;
-    let celular = document.getElementById("numbercita").value;
-    let email = document.getElementById("emailcita").value;
-    let fecha = document.getElementById("datecita").value;
+const campos = {
+  name: false,
+  number: false,
+  email: false,
+  datetime: false,
+};
 
+const validarSolicitudcita = (e) => {
+  console.log(e.target);
+  switch (e.target.name) {
+    case "name":
+      validarCampo(expresiones.name, e.target, "name");
+      break;
+    case "number":
+      validarCampo(expresiones.number, e.target, "number");
+      break;
+    case "email":
+      validarCampo(expresiones.email, e.target, "email");
+      break;
+    case "datetime":
+      validarCampo(expresiones.datetime, e.target, "datetime");
+      break;
+  }
+};
 
-    if (nombre == "") {
-        alert("El nombre es obligatorio digitalo");
-        document.getElementById("namecita").focus();
-    } else if (celular == "") {
-        alert("El numero de celular es obligatorio digitalo");
-        document.getElementById("numbercita").focus();
-    } else if (email == "") {
-        alert("El email es obligatorio digitalo");
-        document.getElementById("emailcita").focus();
-    } else if (fecha == "") {
-        alert("Debes selecionar una fecha digitala");
-        document.getElementById("datecita").focus();
-    } else {
-        addcita (nombre, celular, email, fecha);
-        mensajecita ()
+const validarCampo = (expresion, input, campo) => {
+  if (expresion.test(input.value)) {
+    document
+      .getElementById(`cita__${campo}`)
+      .classList.remove("solicitud__cita-incorrecto");
+    document
+      .getElementById(`cita__${campo}`)
+      .classList.add("solicitud__cita-correcto");
+    document.getElementById(`${campo}`).classList.remove("box-incorrecto");
+    document.getElementById(`${campo}`).classList.add("box");
+    document
+      .querySelector(`#cita__${campo} i`)
+      .classList.add("fa-check-circle");
+    document
+      .querySelector(`#cita__${campo} i`)
+      .classList.remove("fa-times-circle");
+    document
+      .querySelector(`#cita__${campo} .solicitud__input-error`)
+      .classList.remove("solicitud__input-error-activo");
+    campos[campo] = true;
+  } else {
+    document
+      .getElementById(`cita__${campo}`)
+      .classList.add("solicitud__cita-incorrecto");
+    document
+      .getElementById(`cita__${campo}`)
+      .classList.remove("solicitud__cita-correcto");
+    document.getElementById(`${campo}`).classList.add("box-incorrecto");
+    document.getElementById(`${campo}`).classList.remove("box");
+    document
+      .querySelector(`#cita__${campo} i`)
+      .classList.add("fa-times-circle");
+    document
+      .querySelector(`#cita__${campo} i`)
+      .classList.remove("fa-check-circle");
+    document
+      .querySelector(`#cita__${campo} .solicitud__input-error`)
+      .classList.add("solicitud__input-error-activo");
+    campos[campo] = false;
+  }
+};
 
-        function mensajecita () {
-            let lista = getlistacita ()
-            console.log(lista);
-            const div = document.createElement("div");
-            div.innerHTML = " "
+inputs.forEach((input) => {
+  input.addEventListener("keyup", validarSolicitudcita);
+  input.addEventListener("blur", validarSolicitudcita);
+});
 
-            for(let i=0; i<lista.length; i++){
-                div.innerHTML = '<div id="cita" class="box4 "><h4 >Buen día! Sr(a).' + ' ' + lista[i].paciente.toUpperCase() + ' ' + ' su turno de atención es: <span>' + lista[i].fechaCita + ' ' + ', </span> se agradece puntual asistencia.</h4></div>';
-                formulario.appendChild(div);
+formulario.addEventListener("submit", (e) => {
+  e.preventDefault();
 
-                formulario.addEventListener("change", borrar);
-                function borrar(){
-                    return div.innerHTML = " "
-                }
-            }
+  let nombre = document.getElementById("name").value;
+  let telefono = document.getElementById("number").value;
+  let correo = document.getElementById("email").value;
+  let fechayHora = document.getElementById("datetime").value;
+
+  if (campos.name && campos.number && campos.email && campos.datetime) {
+    formulario.reset();
+
+    document
+      .getElementById("solicitud__mensaje-exito")
+      .classList.add("solicitud__mensaje-exito-activo");
+    setTimeout(() => {
+      document
+        .getElementById("solicitud__mensaje-exito")
+        .classList.remove("solicitud__mensaje-exito-activo");
+    }, 5000);
+
+    document.querySelectorAll(".solicitud__cita-correcto").forEach((icono) => {
+      icono.classList.remove("solicitud__cita-correcto");
+    });
+
+    addcita(nombre, telefono, correo, fechayHora);
+    mensajecita();
+
+    function mensajecita() {
+      let lista = getlistacita();
+      console.log(lista);
+      const div = document.createElement("div");
+      div.innerHTML = " ";
+
+      for (let i = 0; i < lista.length; i++) {
+        div.innerHTML =
+          '<div id="cita" class="box4 "><h4 >Buen día! Sr(a).' +
+          " " +
+          lista[i].paciente.toUpperCase() +
+          " " +
+          " su turno de atención es: <span>" +
+          lista[i].fechaCita +
+          " " +
+          ", </span> se agradece puntual asistencia.</h4></div>";
+        formulario.appendChild(div);
+
+        formulario.addEventListener("change", borrar);
+        function borrar() {
+          return (div.innerHTML = " ");
         }
-        document.getElementById("namecita").value = "";
-        document.getElementById("numbercita").value = "";
-        document.getElementById("emailcita").value = "";
-        document.getElementById("datecita").value = "";
-        document.getElementById("namecita").focus()
-    } 
-}
-
-
+      }
+    }
+  } else {
+    document
+      .getElementById("solicitud__mensaje")
+      .classList.add("solicitud__mensaje-activo");
+    setTimeout(() => {
+      document
+        .getElementById("solicitud__mensaje")
+        .classList.remove("solicitud__mensaje-activo");
+    }, 3000);
+  }
+});
 
 // evento: "click"
-
 
 let boton = document.getElementById("btnCalc");
 boton.addEventListener("click", calculateCalorie);
 
 function calculateCalorie() {
-    let edad = document.querySelector("input[name=age]").value;
-    let genero = document.querySelector("input[name=gender]:checked").value;
-    let altura = document.querySelector("input[name=height]").value;
-    let peso = document.querySelector("input[name=weight]").value;
-    let grasacorp = document.querySelector("input[name=bodyFat]").value;
-    let actividad = document.querySelector("select[name=activity]").value;
-    let unidad = document.querySelector("input[name=unit]:checked").value;
-    let formula = document.querySelector("input[name=formula]:checked").value;
+  let edad = document.querySelector("input[name=age]").value;
+  let genero = document.querySelector("input[name=gender]:checked").value;
+  let altura = document.querySelector("input[name=height]").value;
+  let peso = document.querySelector("input[name=weight]").value;
+  let grasacorp = document.querySelector("input[name=bodyFat]").value;
+  let actividad = document.querySelector("select[name=activity]").value;
+  let unidad = document.querySelector("input[name=unit]:checked").value;
+  let formula = document.querySelector("input[name=formula]:checked").value;
 
+  let TMB = "";
+  if (formula == 0) {
+    // Mifflin
+    TMB = Mifflin(genero, edad, altura, peso);
+  } else if (formula == 1) {
+    // Harris
+    TMB = Harris(genero, edad, altura, peso);
+  } else if (formula == 2) {
+    // Katch
+    TMB = Katch(grasacorp, peso);
+  }
 
-    let TMB = '';
-    if (formula == 0) // Mifflin
-    {
-        TMB = Mifflin(genero, edad, grasacorp, altura, peso);
-    } else if (formula == 1) // Harris
-    {
-        TMB = Harris(genero, edad, grasacorp, altura, peso);
-    } else if (formula == 2) // Katch
-    {
-        TMB = Katch(grasacorp, peso);
-    }
+  let ret = parseFloat(TMB) * parseFloat(actividad);
+  if (unidad == "kilojoules") {
+    ret = ret * 4.1868;
+  }
 
-    let ret = parseFloat(TMB) * parseFloat(actividad);
-    if (unidad == 'kilojoules') {
-        ret = (ret * 4.1868);
-    }
-
-    document.querySelector(".ans_calculate").innerHTML = '<div class="box4 "><h4 >Deberia consumir <span>' + Math.ceil(ret) + ' ' + unidad + '/dia </span> para mantener su peso.</h4></div>';
+  document.querySelector(".ans_calculate").innerHTML =
+    '<div class="box4 "><h4 >Deberia consumir <span>' +
+    Math.ceil(ret) +
+    " " +
+    unidad +
+    "/dia </span> para mantener su peso.</h4></div>";
 }
 
-function Mifflin(genero, edad, grasacorp, altura, peso) {
-    let TMB = (10 * peso) + (6.25 * altura) - (5 * edad) + 5;
-    if (genero == 1) // Femenino
-    {
-        TMB = (10 * peso) + (6.25 * altura) - (5 * edad) - 161;
-    }
+function Mifflin(genero, edad, altura, peso) {
+  let TMB = 10 * peso + 6.25 * altura - 5 * edad + 5;
+  if (genero == 1) {
+    // Femenino
+    TMB = 10 * peso + 6.25 * altura - 5 * edad - 161;
+  }
 
-    return TMB;
+  return TMB;
 }
 
-function Harris(genero, edad, grasacorp, altura, peso) {
-    let TMB = (13.397 * peso) + (4.799 * altura) - (5.677 * edad) + 88.362;
-    if (genero == 1) // Femenino
-    {
-        TMB = (9.247 * peso) + (3.098 * altura) - (4.330 * edad) + 447.593;
-    }
+function Harris(genero, edad, altura, peso) {
+  let TMB = 13.397 * peso + 4.799 * altura - 5.677 * edad + 88.362;
+  if (genero == 1) {
+    // Femenino
+    TMB = 9.247 * peso + 3.098 * altura - 4.33 * edad + 447.593;
+  }
 
-    return TMB;
+  return TMB;
 }
 
 function Katch(grasacorp, peso) {
-    let TMB = 370 + 21.6 * (1 - (grasacorp / 100)) * peso;
+  let TMB = 370 + 21.6 * (1 - grasacorp / 100) * peso;
 
-    return TMB;
+  return TMB;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* Calculo de IMC y cantidad de calorias diarias consumidas en reposo */
 
@@ -600,9 +678,7 @@ alert("Para indicar datos con decimales utilizar el punto ( . ) , Ejemplo: 83.8"
 
 paciente.calcularIMC(); */
 
-
-// Array 
-
+// Array
 
 /*     let pacientes = [];
     pacientes.push(new Paciente("Freddy", 82 , 1.73, 42, "masculino"));
@@ -612,7 +688,6 @@ paciente.calcularIMC(); */
     pacientes.push(new Paciente("Jesus", 102 , 1.85, 33,"masculino" ));
     
     console.log(pacientes) */
-
 
 // Metodo de Busqueda
 
@@ -629,7 +704,6 @@ paciente.calcularIMC(); */
         }
     }
      */
-
 
 // Metodo de Filtrado
 
@@ -652,5 +726,3 @@ paciente.calcularIMC(); */
             alert('NO existe Paciente con esa Edad');
         }
     } */
-
-

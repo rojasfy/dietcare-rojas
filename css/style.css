@@ -3,6 +3,7 @@
 :root {
     --green: #16a085;
     --black: #444;
+    --red: #fc0707;
     --light-color: #777;
     --box-shadow: .5rem .5rem 0 rgba(22, 160, 133, .2);
     --text-shadow: .4rem .4rem 0 rgba(0, 0, 0, .2);
@@ -337,7 +338,6 @@ section:nth-child(even) {
 }
 
 
-
 .book .row .image {
     flex: 1 1 45rem;
 }
@@ -363,6 +363,144 @@ section:nth-child(even) {
     padding: 2rem;
     border-radius: .5rem;
 }
+
+
+/* Estilos solicitud Solicitud de cita */
+
+.solicitud__cita-input {
+	position: relative;
+}
+
+.solicitud__input {
+	width: 100%;
+	background: #fff;
+	border: 3px solid transparent;
+	border-radius: 3px;
+	height: 45px;
+	line-height: 45px;
+	padding: 0 40px 0 10px;
+	transition: .3s ease all;
+}
+
+.solicitud__input:focus {
+	border: 3px solid #0075FF;
+	outline: none;
+	box-shadow: 3px 0px 30px rgba(163,163,163, 0.4);
+}
+
+.solicitud__input-error {
+	font-size: 12px;
+	margin-bottom: 0;
+	display: none;
+}
+
+.solicitud__input-error-activo {
+	display: block;
+}
+
+.solicitud__validacion-estado {
+	position: absolute;
+	right: 10px;
+	bottom: 15px;
+	z-index: 100;
+	font-size: 16px;
+	opacity: 0;
+}
+
+.solicitud__checkbox {
+	margin-right: 10px;
+}
+
+.solicitud__cita-terminos, 
+.solicitud__mensaje,
+.solicitud__cita-btn-enviar {
+	grid-column: span 2;
+}
+
+.solicitud__mensaje {
+	height: 45px;
+	line-height: 45px;
+	background: #F66060;
+	padding: 0 15px;
+	border-radius: 3px;
+	display: none;
+}
+
+.solicitud__mensaje-activo {
+	display: block;
+}
+
+.solicitud__mensaje p {
+	margin: 0;
+}
+
+.solicitud__cita-btn-enviar {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.solicitud__btn {
+	height: 45px;
+	line-height: 45px;
+	width: 30%;
+	background: #000;
+	color: #fff;
+	font-weight: bold;
+	border: none;
+	border-radius: 3px;
+	cursor: pointer;
+	transition: .1s ease all;
+}
+
+.solicitud__btn:hover {
+	box-shadow: 3px 0px 30px rgba(163,163,163, 1);
+}
+
+.solicitud__mensaje-exito {
+	font-size: 14px;
+	color: #119200;
+	display: none;
+}
+
+.solicitud__mensaje-exito-activo {
+	display: block;
+}
+
+/* ----- -----  Estilos para Validacion ----- ----- */
+.solicitud__cita-correcto .solicitud__validacion-estado {
+	color: #1ed12d;
+	opacity: 1;
+}
+
+.solicitud__cita-incorrecto .solicitud__label {
+	color: #bb2929;
+}
+
+.solicitud__cita-incorrecto .solicitud__validacion-estado {
+	color: #bb2929;
+	opacity: 1;
+}
+
+.solicitud__cita-incorrecto .solicitud__input {
+	border: 3px solid #bb2929;
+}
+
+
+.book .row form .box-incorrecto {
+    width: 100%;
+    margin: .7rem 0;
+    border-radius: .5rem;
+    border: 3px solid #bb2929;
+    font-size: 1.6rem;
+    color: var(--black);
+    text-transform: none;
+    padding: 1rem;
+  }
+
+
+/* Fin Estilos solicitud Solicitud de cita */
+
 
 
 
@@ -678,11 +816,6 @@ section:nth-child(even) {
 .footer .credit span {
     color: var(--green);
 }
-
-
-
-/* Estilos calculadora IMC */
-
 
 
 
