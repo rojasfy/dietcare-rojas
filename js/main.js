@@ -45,14 +45,14 @@ const validarCampo = (expresion, input, campo) => {
     document
       .getElementById(`cita__${campo}`)
       .classList.add("solicitud__cita-correcto");
-    document.getElementById(`${campo}`).classList.remove("box-incorrecto");
-    document.getElementById(`${campo}`).classList.add("box");
     document
       .querySelector(`#cita__${campo} i`)
       .classList.add("fa-check-circle");
     document
       .querySelector(`#cita__${campo} i`)
       .classList.remove("fa-times-circle");
+    document.getElementById(`${campo}`).classList.remove("box-incorrecto");
+    document.getElementById(`${campo}`).classList.add("box");
     document
       .querySelector(`#cita__${campo} .solicitud__input-error`)
       .classList.remove("solicitud__input-error-activo");
@@ -64,14 +64,14 @@ const validarCampo = (expresion, input, campo) => {
     document
       .getElementById(`cita__${campo}`)
       .classList.remove("solicitud__cita-correcto");
-    document.getElementById(`${campo}`).classList.add("box-incorrecto");
-    document.getElementById(`${campo}`).classList.remove("box");
     document
       .querySelector(`#cita__${campo} i`)
       .classList.add("fa-times-circle");
     document
       .querySelector(`#cita__${campo} i`)
       .classList.remove("fa-check-circle");
+    document.getElementById(`${campo}`).classList.add("box-incorrecto");
+    document.getElementById(`${campo}`).classList.remove("box");
     document
       .querySelector(`#cita__${campo} .solicitud__input-error`)
       .classList.add("solicitud__input-error-activo");

@@ -473,9 +473,7 @@ section:nth-child(even) {
 	opacity: 1;
 }
 
-.solicitud__cita-incorrecto .solicitud__label {
-	color: #bb2929;
-}
+
 
 .solicitud__cita-incorrecto .solicitud__validacion-estado {
 	color: #bb2929;
