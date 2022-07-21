@@ -1,3 +1,35 @@
+//Uso de libreria página inicio boton contactanos
+
+const contactanos = document.getElementById("contactanos");
+
+contactanos.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  Swal.fire({
+    input: "text", //puede ser text, number, email, password, textarea, select, radio
+    confirmButtonText: "Enviar",
+    showCancelButton: true,
+    title: "Escribe tu correo",
+    width: 400,
+    padding: "2em",
+    color: "#16a085",
+    background: "#f5f5f5;",
+    confirmButtonColor: "#16a085",
+    cancelButtonColor: "#444",
+  }).then((result) => {
+    if (result.value) {
+      Swal.fire({
+        title: "¡Tu correo fue recibido!",
+        html:
+          "Pronto te contactaremos al correo: <pre><code>" +
+          JSON.stringify(result.value) +
+          "</code></pre>",
+        confirmButtonText: "Ok",
+      });
+    }
+  });
+});
+
 // evento: "submit"
 
 const formulario = document.getElementById("formCita");
