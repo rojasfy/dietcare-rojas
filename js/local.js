@@ -22,16 +22,6 @@ function getlistacita() {
   return listacita;
 }
 
-function getFriendList() {
-  var storedList = localStorage.getItem("localFriendList");
-  if (storedList == null) {
-    friendList = [];
-  } else {
-    friendList = JSON.parse(storedList);
-  }
-  return friendList;
-}
-
 function localStoragelistacita(plista) {
   localStorage.setItem("listacitalocal", JSON.stringify(plista));
 }

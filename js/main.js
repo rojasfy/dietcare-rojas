@@ -6,7 +6,7 @@ contactanos.addEventListener("click", (e) => {
   e.preventDefault();
 
   Swal.fire({
-    input: "text", //puede ser text, number, email, password, textarea, select, radio
+    input: "text",
     confirmButtonText: "Enviar",
     showCancelButton: true,
     title: "Escribe tu correo",
