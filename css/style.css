@@ -500,7 +500,7 @@ section:nth-child(even) {
 /* Fin Estilos solicitud Solicitud de cita */
 
 
-
+/* Estilos calculadora gasto calorico */
 
 .book .row .CalculateForm {
     flex: 1 1 35rem;
@@ -815,6 +815,160 @@ section:nth-child(even) {
     color: var(--green);
 }
 
+
+/* Estilos recetas */
+.receta {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 0;
+    background-color: rgb(26, 26, 27);
+  }
+  .recetario{
+    width: 100%;
+    height: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  #busqueda{
+    width: 100%;
+    margin: .7rem auto;
+    border: var(--border);
+    background: #fff;
+    border-radius: .5rem;
+    box-shadow: var(--box-shadow);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+
+  }
+ 
+  #busqueda i {
+    color: var(--green);
+    font-size: 3rem;
+    padding-bottom: .5rem;
+  }
+
+
+
+  .busqueda-receta{
+    margin-top: 50px;
+    width: 100%;
+    display: grid;
+    grid-gap: 25px;
+    grid-template: auto / repeat(auto-fit, minmax(300px, 1fr));
+  }
+  .articulo{
+    width: 100%;
+    border: var(--border);
+    box-shadow: var(--box-shadow);
+    border-radius: .5rem;
+    padding: 2.5rem;
+    background: #fff;
+    text-align: justify;
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+  }
+  .articulo img{
+    width: 100%;
+    height: 25rem;
+    border: var(--border);
+    border-radius: .5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .flex-recetario{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .busqueda-receta .title{
+    margin: 20px 10px 0 0;
+    font-weight: 600;
+    font-size: 1.9rem;
+    color: var(--light-color);
+    max-width: 170px;
+  }
+  .view-btn{
+    text-align: center;
+    width: 120px;
+    font-weight: 500;
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+    padding: .5rem;
+    padding-left: 1rem;
+    border: var(--border);
+    border-radius: .5rem;
+    box-shadow: var(--box-shadow);
+    color: var(--green);
+    cursor: pointer;
+    font-size: 1.5rem;
+    background: #fff;
+  }
+
+  .articulo-data-cal{
+    margin-top: 5px;
+    letter-spacing: .05rem;
+    line-height: 2.5rem;
+    font-size: 1.4rem;
+    color: black;
+    text-align: left;
+    font-weight: 500;
+  }
+
+  .articulo-data{
+    margin-top: 5px ;
+    letter-spacing: .05rem;
+    line-height: 2.5rem;
+    font-size: 1.4rem;
+    color: var(--light-color);
+    text-align: left;
+  }
+  
+  .recetario .global form {
+    max-width: 800px;
+  }
+  .recetario .global form input {
+    padding: 20px;
+    font-size: 2.6rem;
+    color: var(--green);
+    background: none;
+  }
+
+  .recetario form {
+    max-width: 800px;
+  }
+  
+  .recetario form input {
+    padding: 20px;
+    font-size: 2.6rem;
+    color: var(--green);
+    background: none;
+  }
+
+
+  @media (max-width: 768px){
+    .busqueda-receta{
+      grid-gap:10px
+    }
+    .recetario.global .textreceta{
+      font-size: 4rem;
+    }
+    .recetario.global form {
+      max-width: 500px;
+    }
+    .recetario.global form input{
+      padding: 10px;
+      font-size: 2rem;
+    }
+  }
 
 
 
