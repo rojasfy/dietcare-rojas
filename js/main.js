@@ -245,56 +245,57 @@ function Katch(grasacorp, peso) {
   return TMB;
 }
 
-const searchForm = document.getElementById("busqueda");
-const searchResultDiv = document.querySelector(".busqueda-receta");
+// uso de API de recetas y sus calorias
+
+const busquedaForm = document.getElementById("busqueda");
+const busquedaResultDiv = document.querySelector(".busqueda-receta");
 const recetario = document.querySelector(".recetario");
-let searchQuery = "";
+let busquedaQuery = "";
 const APP_ID = "1565b1a9";
 const APP_key = "04833c853463be502a42c56c425c78fa";
 // console.log(recetario)
-searchForm.addEventListener("submit", (e) => {
+busquedaForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  searchQuery = e.target.querySelector("input").value;
-  console.log(searchQuery);
+  busquedaQuery = e.target.querySelector("input").value;
+  console.log(busquedaQuery);
   fetchAPI();
 });
 
 async function fetchAPI() {
-  const baseURL = `https://api.edamam.com/search?q=${searchQuery}&app_id=${APP_ID}&app_key=${APP_key}&from=0&to=20`;
+  const baseURL = `https://api.edamam.com/search?q=${busquedaQuery}&app_id=${APP_ID}&app_key=${APP_key}&from=0&to=20`;
   const response = await fetch(baseURL);
   const data = await response.json();
-  generateHTML(data.hits);
+  generarHTML(data.hits);
   console.log(data);
 }
 
-function generateHTML(results) {
-  recetario.classList.remove("global");
-  let generatedHTML = "";
+function generarHTML(results) {
+  let generarHTML = "";
   results.map((result) => {
-    generatedHTML += `
+    generarHTML += `
       <div class="articulo">
         <img src="${result.recipe.image}" alt="img">
         <div class="flex-recetario">
           <h1 class="title">${result.recipe.label}</h1>
           <a class="view-btn" target="_blank" href="${
             result.recipe.url
-          }">View Recipe</a>
+          }">Ver receta</a>
         </div>
-        <p class="articulo-data-cal">Calories: ${result.recipe.calories.toFixed(
+        <p class="articulo-data-cal"><span>Calorias:</span> ${result.recipe.calories.toFixed(
           2
         )}</p>
-        <p class="articulo-data">Diet label: ${
+        <p class="articulo-data"><span>Etiqueta de Dieta:</span> ${
           result.recipe.dietLabels.length > 0
             ? result.recipe.dietLabels
-            : "No Data Found"
+            : "Datos no encontrados"
         }</p>
-        <p class="articulo-data">Health labels: ${
+        <p class="articulo-data"><span>Etiqueta de Salud:</span>${
           result.recipe.healthLabels
         }</p>
       </div>
     `;
   });
-  searchResultDiv.innerHTML = generatedHTML;
+  busquedaResultDiv.innerHTML = generarHTML;
 }
 
 /* Calculo de IMC y cantidad de calorias diarias consumidas en reposo */

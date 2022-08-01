@@ -8,7 +8,14 @@
     --box-shadow: .5rem .5rem 0 rgba(22, 160, 133, .2);
     --text-shadow: .4rem .4rem 0 rgba(0, 0, 0, .2);
     --border: .2rem solid var(--green);
+    --tenne-tawny: #d65108;
+    --tenne-tawny-dark: #b54507;
 }
+
+
+
+
+
 
 * {
     font-family: 'Poppins', sans-serif;
@@ -707,113 +714,6 @@ section:nth-child(even) {
     z-index: -1;
 }
 
-.blogs .box-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
-    gap: 2rem;
-}
-
-.blogs .box-container .box {
-    border: var(--border);
-    box-shadow: var(--box-shadow);
-    border-radius: .5rem;
-    padding: 2rem;
-}
-
-.blogs .box-container .box .image {
-    height: 20rem;
-    overflow: hidden;
-    border-radius: .5rem;
-}
-
-.blogs .box-container .box .image img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-}
-
-.blogs .box-container .box:hover .image img {
-    transform: scale(1.2);
-}
-
-.blogs .box-container .box .content {
-    padding-top: 1rem;
-}
-
-.blogs .box-container .box .content .icon {
-    padding: 1rem 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.blogs .box-container .box .content .icon a {
-    font-size: 1.4rem;
-    color: var(--light-color);
-}
-
-.blogs .box-container .box .content .icon a:hover {
-    color: var(--green);
-}
-
-.blogs .box-container .box .content .icon a i {
-    padding-right: .5rem;
-    color: var(--green);
-}
-
-.blogs .box-container .box .content h3 {
-    color: var(--black);
-    font-size: 3rem;
-}
-
-.blogs .box-container .box .content p {
-    color: var(--light-color);
-    font-size: 1.5rem;
-    line-height: 1.8;
-    padding: 1rem 0;
-}
-
-.footer .box-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
-    gap: 2rem;
-}
-
-.footer .box-container .box h3 {
-    font-size: 2.5rem;
-    color: var(--black);
-    padding: 1rem 0;
-}
-
-.footer .box-container .box a {
-    display: block;
-    font-size: 1.5rem;
-    color: var(--light-color);
-    padding: 1rem 0;
-}
-
-.footer .box-container .box a i {
-    padding-right: .5rem;
-    color: var(--green);
-}
-
-.footer .box-container .box a:hover i {
-    padding-right: 2rem;
-}
-
-.footer .credit {
-    padding: 1rem;
-    padding-top: 2rem;
-    margin-top: 2rem;
-    text-align: center;
-    font-size: 2rem;
-    color: var(--light-color);
-    border-top: .1rem solid rgba(0, 0, 0, .1);
-}
-
-.footer .credit span {
-    color: var(--green);
-}
 
 
 /* Estilos recetas */
@@ -835,25 +735,32 @@ section:nth-child(even) {
   }
 
   #busqueda{
-    width: 100%;
-    margin: .7rem auto;
-    border: var(--border);
-    background: #fff;
-    border-radius: .5rem;
-    box-shadow: var(--box-shadow);
+    margin: 1.2rem auto;
     display: flex;
+    align-items: stretch;
+    width: 540px;
+    margin-left: auto;
+    margin-right: auto;
     justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
 
   }
+
+  #busqueda button {
+    width: 60px;
+    height: 60px;
+    font-size: 1.8rem;
+    background: var(--green);
+    border: none;
+    border-top-right-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+     cursor: pointer;}
+
  
-  #busqueda i {
-    color: var(--green);
+  #busqueda button i {
+    color:white;
     font-size: 3rem;
     padding-bottom: .5rem;
-  }
-
+    background: var(--green);}
 
 
   .busqueda-receta{
@@ -920,7 +827,12 @@ section:nth-child(even) {
     font-size: 1.4rem;
     color: black;
     text-align: left;
-    font-weight: 500;
+    font-weight: 600;
+  }
+
+  .articulo-data-cal span{
+    color: var(--green);
+    font-weight: 600;
   }
 
   .articulo-data{
@@ -931,44 +843,75 @@ section:nth-child(even) {
     color: var(--light-color);
     text-align: left;
   }
-  
-  .recetario .global form {
-    max-width: 800px;
-  }
-  .recetario .global form input {
-    padding: 20px;
-    font-size: 2.6rem;
+
+  .articulo-data span{
     color: var(--green);
-    background: none;
+    font-weight: 500;
   }
+  
 
   .recetario form {
-    max-width: 800px;
+    max-width: 650px;
   }
   
   .recetario form input {
-    padding: 20px;
-    font-size: 2.6rem;
+    background: white;
+    height: 60px;
+    padding: 0 1rem;
+    font-size: 2.0rem;
+    font-family: inherit;
+    outline: 0;
+    border: 1px solid var(--green);
     color: var(--green);
-    background: none;
+    border-top-left-radius: 2rem;
+    border-bottom-left-radius: 2rem;
+    width: 100%;
   }
 
+/* Estilos footer */
 
-  @media (max-width: 768px){
-    .busqueda-receta{
-      grid-gap:10px
-    }
-    .recetario.global .textreceta{
-      font-size: 4rem;
-    }
-    .recetario.global form {
-      max-width: 500px;
-    }
-    .recetario.global form input{
-      padding: 10px;
-      font-size: 2rem;
-    }
-  }
+.footer .box-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
+    gap: 2rem;
+}
+
+.footer .box-container .box h3 {
+    font-size: 2.5rem;
+    color: var(--black);
+    padding: 1rem 0;
+}
+
+.footer .box-container .box a {
+    display: block;
+    font-size: 1.5rem;
+    color: var(--light-color);
+    padding: 1rem 0;
+}
+
+.footer .box-container .box a i {
+    padding-right: .5rem;
+    color: var(--green);
+}
+
+.footer .box-container .box a:hover i {
+    padding-right: 2rem;
+}
+
+.footer .credit {
+    padding: 1rem;
+    padding-top: 2rem;
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 2rem;
+    color: var(--light-color);
+    border-top: .1rem solid rgba(0, 0, 0, .1);
+}
+
+.footer .credit span {
+    color: var(--green);
+}
+
 
 
 
@@ -1033,3 +976,17 @@ section:nth-child(even) {
     }
 
 }
+
+@media (max-width: 768px){
+    .busqueda-receta{
+      grid-gap:10px
+    }
+
+    .recetario.global form {
+      max-width: 500px;
+    }
+    .recetario.global form input{
+      padding: 10px;
+      font-size: 2rem;
+    }
+  }
