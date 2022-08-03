@@ -753,14 +753,28 @@ section:nth-child(even) {
     border: none;
     border-top-right-radius: 2rem;
     border-bottom-right-radius: 2rem;
-     cursor: pointer;}
+     cursor: pointer;
+     transition: all 0.4s linear;
+     -webkit-transition: all 0.4s linear;
+     -moz-transition: all 0.4s linear;
+     -ms-transition: all 0.4s linear;
+     -o-transition: all 0.4s linear;}
 
+    
  
   #busqueda button i {
     color:white;
     font-size: 3rem;
     padding-bottom: .5rem;
-    background: var(--green);}
+    transition: all 0.2s linear;
+    -webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -ms-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;}
+
+    #busqueda button i:hover{
+        opacity: 0.8;
+    }
 
 
   .busqueda-receta{

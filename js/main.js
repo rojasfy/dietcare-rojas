@@ -30,11 +30,10 @@ contactanos.addEventListener("click", (e) => {
   });
 });
 
-// evento: "submit"
+// Formulario de Solicitud de cita (evento: "submit")
 
 const formulario = document.getElementById("formCita");
 const inputs = document.querySelectorAll("#formCita input");
-//formulario.addEventListener("submit", solicitarCita);
 
 const expresiones = {
   name: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
@@ -150,15 +149,11 @@ formulario.addEventListener("submit", (e) => {
       div.innerHTML = " ";
 
       for (let i = 0; i < lista.length; i++) {
-        div.innerHTML =
-          '<div id="cita" class="box4 "><h4 >Buen día! Sr(a).' +
-          " " +
-          lista[i].paciente.toUpperCase() +
-          " " +
-          " su turno de atención es: <span>" +
-          lista[i].fechaCita +
-          " " +
-          ", </span> se agradece puntual asistencia.</h4></div>";
+        div.innerHTML = `<div id="cita" class="box4 "><h4 >Buen día! Sr(a).<span>${lista[
+          i
+        ].paciente.toUpperCase()},</span> su turno de atención es: <span>${
+          lista[i].fechaCita
+        },</span> se agradece puntual asistencia.</h4></div>`;
         formulario.appendChild(div);
 
         formulario.addEventListener("change", borrar);
@@ -179,12 +174,12 @@ formulario.addEventListener("submit", (e) => {
   }
 });
 
-// evento: "click"
+// Calculadora de IMC y Calorias (evento: "click")
 
 let boton = document.getElementById("btnCalc");
-boton.addEventListener("click", calculateCalorie);
+boton.addEventListener("click", calculo_IMC_Caloria);
 
-function calculateCalorie() {
+function calculo_IMC_Caloria() {
   let edad = document.querySelector("input[name=age]").value;
   let genero = document.querySelector("input[name=gender]:checked").value;
   let altura = document.querySelector("input[name=height]").value;
@@ -193,6 +188,65 @@ function calculateCalorie() {
   let actividad = document.querySelector("select[name=activity]").value;
   let unidad = document.querySelector("input[name=unit]:checked").value;
   let formula = document.querySelector("input[name=formula]:checked").value;
+
+  let IMC = CalculoIMC(peso, altura);
+
+  console.log(IMC);
+
+  let resIMC = "";
+  let sugerencia = "";
+  let consumo = "";
+  let recomendacion = "";
+
+  console.log(resIMC);
+
+  if (IMC < 18.5) {
+    resIMC = "peso mas bajo de lo normal";
+    sugerencia = "aumentar";
+    consumo = "mayor";
+    recomendacion = ".";
+  } else if (IMC == 18.5 || IMC < 24.9) {
+    resIMC = "peso normal";
+    sugerencia = "mantener";
+    consumo = "igual";
+    recomendacion = ".";
+  } else if (IMC == 24.9 || IMC < 26.9) {
+    resIMC = "sobrepeso grado I";
+    sugerencia = "bajar";
+    consumo = "menor";
+    recomendacion = ".";
+  } else if (IMC == 26.9 || IMC < 29.9) {
+    resIMC = "sobrepeso grado II";
+    sugerencia = "bajar";
+    consumo = "menor";
+    recomendacion = ".";
+  } else if (IMC == 29.9 || IMC < 34.9) {
+    resIMC = "obesidad  tipo I";
+    sugerencia = "bajar";
+    consumo = "menor";
+    recomendacion =
+      ", se recomienda <span>visitar el centro de nutrición Dietcare</span> y realizar alguna actividad física.";
+  } else if (IMC == 34.9 || IMC < 39.9) {
+    resIMC = "obesidad  tipo II";
+    sugerencia = "bajar";
+    consumo = "menor";
+    recomendacion =
+      ", se recomienda <span>visitar el centro de nutrición Dietcare</span> y realizar alguna actividad física.";
+  } else if (IMC == 39.9 || IMC < 49.9) {
+    resIMC = "obesidad  tipo III (mórbida)";
+    sugerencia = "bajar";
+    consumo = "menor";
+    recomendacion =
+      ", se recomienda <span>visitar al médico</span> para evaluar su estado de salud .";
+  } else if (IMC >= 49.9) {
+    resIMC = "obesidad  tipo IV (extrema)";
+    sugerencia = "bajar";
+    consumo = "menor";
+    recomendacion =
+      ", se recomienda con <span>urgencia visitar al médico</span> para evaluar su estado de salud.";
+  }
+
+  console.log(resIMC);
 
   let TMB = "";
   if (formula == 0) {
@@ -211,12 +265,11 @@ function calculateCalorie() {
     ret = ret * 4.1868;
   }
 
-  document.querySelector(".ans_calculate").innerHTML =
-    '<div class="box4 "><h4 >Deberia consumir <span>' +
-    Math.ceil(ret) +
-    " " +
-    unidad +
-    "/dia </span> para mantener su peso.</h4></div>";
+  document.querySelector(
+    ".ans_calculate"
+  ).innerHTML = `<div class="box4 "><h4 >Tu IMC es de: <span> ${IMC}</span>, que indica un estado de <span>${resIMC}</span>, su cuerpo  consume <span> ${Math.ceil(
+    ret
+  )} ${unidad} </span> diarias, si desea <span>${sugerencia}</span> de  peso debe consumir al día un numero <span>${consumo}</span> de ${unidad} ${recomendacion}</h4></div>`;
 }
 
 function Mifflin(genero, edad, altura, peso) {
@@ -243,6 +296,11 @@ function Katch(grasacorp, peso) {
   let TMB = 370 + 21.6 * (1 - grasacorp / 100) * peso;
 
   return TMB;
+}
+
+function CalculoIMC(peso, altura) {
+  let imc = Math.round((peso / (altura * altura)) * 10) / 10;
+  return imc;
 }
 
 // uso de API de recetas y sus calorias
@@ -297,6 +355,8 @@ function generarHTML(results) {
   });
   busquedaResultDiv.innerHTML = generarHTML;
 }
+
+//Primeros desafios realizados:
 
 /* Calculo de IMC y cantidad de calorias diarias consumidas en reposo */
 
