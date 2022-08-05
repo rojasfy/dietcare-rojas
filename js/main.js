@@ -193,60 +193,84 @@ function calculo_IMC_Caloria() {
 
   console.log(IMC);
 
-  let resIMC = "";
-  let sugerencia = "";
-  let consumo = "";
-  let recomendacion = "";
+  const dataIMC = [
+    {
+      resIMC: "peso mas bajo de lo normal",
+      sugerencia: "aumentar",
+      consumo: "mayor",
+      recomendacion: ".",
+    },
+    {
+      resIMC: "peso normal",
+      sugerencia: "mantener",
+      consumo: "igual",
+      recomendacion: ".",
+    },
+    {
+      resIMC: "sobrepeso grado I",
+      sugerencia: "bajar",
+      consumo: "menor",
+      recomendacion: ".",
+    },
+    {
+      resIMC: "sobrepeso grado II",
+      sugerencia: "bajar",
+      consumo: "menor",
+      recomendacion: ".",
+    },
+    {
+      resIMC: "obesidad  tipo I",
+      sugerencia: "bajar",
+      consumo: "menor",
+      recomendacion:
+        ", se recomienda <span>visitar el centro de nutrición Dietcare</span> y realizar alguna actividad física.",
+    },
+    {
+      resIMC: "obesidad  tipo II",
+      sugerencia: "bajar",
+      consumo: "menor",
+      recomendacion:
+        ", se recomienda <span>visitar el centro de nutrición Dietcare</span> y realizar alguna actividad física.",
+    },
+    {
+      resIMC: "obesidad  tipo III (mórbida)",
+      sugerencia: "bajar",
+      consumo: "menor",
+      recomendacion:
+        ", se recomienda <span>visitar al médico</span> para evaluar su estado de salud .",
+    },
+    {
+      resIMC: "obesidad  tipo IV (extrema)",
+      sugerencia: "bajar",
+      consumo: "menor",
+      recomendacion:
+        ", se recomienda con <span>urgencia visitar al médico</span> para evaluar su estado de salud.",
+    },
+  ];
 
-  console.log(resIMC);
+  console.log(dataIMC);
+
+  let mensajeIMC = "";
 
   if (IMC < 18.5) {
-    resIMC = "peso mas bajo de lo normal";
-    sugerencia = "aumentar";
-    consumo = "mayor";
-    recomendacion = ".";
+    mensajeIMC = dataIMC[0];
   } else if (IMC == 18.5 || IMC < 24.9) {
-    resIMC = "peso normal";
-    sugerencia = "mantener";
-    consumo = "igual";
-    recomendacion = ".";
+    mensajeIMC = dataIMC[1];
   } else if (IMC == 24.9 || IMC < 26.9) {
-    resIMC = "sobrepeso grado I";
-    sugerencia = "bajar";
-    consumo = "menor";
-    recomendacion = ".";
+    mensajeIMC = dataIMC[2];
   } else if (IMC == 26.9 || IMC < 29.9) {
-    resIMC = "sobrepeso grado II";
-    sugerencia = "bajar";
-    consumo = "menor";
-    recomendacion = ".";
+    mensajeIMC = dataIMC[3];
   } else if (IMC == 29.9 || IMC < 34.9) {
-    resIMC = "obesidad  tipo I";
-    sugerencia = "bajar";
-    consumo = "menor";
-    recomendacion =
-      ", se recomienda <span>visitar el centro de nutrición Dietcare</span> y realizar alguna actividad física.";
+    mensajeIMC = dataIMC[4];
   } else if (IMC == 34.9 || IMC < 39.9) {
-    resIMC = "obesidad  tipo II";
-    sugerencia = "bajar";
-    consumo = "menor";
-    recomendacion =
-      ", se recomienda <span>visitar el centro de nutrición Dietcare</span> y realizar alguna actividad física.";
+    mensajeIMC = dataIMC[5];
   } else if (IMC == 39.9 || IMC < 49.9) {
-    resIMC = "obesidad  tipo III (mórbida)";
-    sugerencia = "bajar";
-    consumo = "menor";
-    recomendacion =
-      ", se recomienda <span>visitar al médico</span> para evaluar su estado de salud .";
+    mensajeIMC = dataIMC[6];
   } else if (IMC >= 49.9) {
-    resIMC = "obesidad  tipo IV (extrema)";
-    sugerencia = "bajar";
-    consumo = "menor";
-    recomendacion =
-      ", se recomienda con <span>urgencia visitar al médico</span> para evaluar su estado de salud.";
+    mensajeIMC = dataIMC[7];
   }
 
-  console.log(resIMC);
+  console.log(mensajeIMC);
 
   let TMB = "";
   if (formula == 0) {
@@ -267,9 +291,15 @@ function calculo_IMC_Caloria() {
 
   document.querySelector(
     ".ans_calculate"
-  ).innerHTML = `<div class="box4 "><h4 >Tu IMC es de: <span> ${IMC}</span>, que indica un estado de <span>${resIMC}</span>, su cuerpo  consume <span> ${Math.ceil(
+  ).innerHTML = `<div class="box4 "><h4 >Tu IMC es de: <span> ${IMC}</span>, que indica un estado de <span>${
+    mensajeIMC.resIMC
+  }</span>, su cuerpo  consume <span> ${Math.ceil(
     ret
-  )} ${unidad} </span> diarias, si desea <span>${sugerencia}</span> de  peso debe consumir al día un numero <span>${consumo}</span> de ${unidad} ${recomendacion}</h4></div>`;
+  )} ${unidad} </span> diarias, si desea <span>${
+    mensajeIMC.sugerencia
+  }</span> de  peso debe consumir al día un numero <span>${
+    mensajeIMC.consumo
+  }</span> de ${unidad} ${mensajeIMC.recomendacion}</h4></div>`;
 }
 
 function Mifflin(genero, edad, altura, peso) {
@@ -324,7 +354,7 @@ async function fetchAPI() {
   const response = await fetch(baseURL);
   const data = await response.json();
   generarHTML(data.hits);
-  console.log(data);
+  console.log(data.hits);
 }
 
 function generarHTML(results) {
