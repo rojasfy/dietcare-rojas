@@ -717,12 +717,12 @@ section:nth-child(even) {
 
 /* Estilos recetas */
 .receta {
-    min-height: 100vh;
+    min-height: 0vh;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 70px 0;
+    padding: 50px 0;
     background-color: rgb(26, 26, 27);
   }
   .recetario{
