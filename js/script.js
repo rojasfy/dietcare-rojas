@@ -141,7 +141,7 @@ const cajapacientes = document.getElementById("box-pacientes");
 
 const datapaciente = [
   {
-    imagen: "image/doc-1.jpg",
+    imagen: "./image/pic-1.png",
     nombre: "Lucas Loccisano",
     rating:
       '<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>',
@@ -149,7 +149,7 @@ const datapaciente = [
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam sapiente nihil aperiam? Repellat sequi nisi aliquid perspiciatis libero nobis rem numquam nesciunt alias sapiente minus voluptatem, reiciendis consequuntur optio dolorem!",
   },
   {
-    imagen: "image/doc-2.jpg",
+    imagen: "./image/pic-2.png",
     nombre: "majo martino",
     rating:
       '<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>',
@@ -157,7 +157,7 @@ const datapaciente = [
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam sapiente nihil aperiam? Repellat sequi nisi aliquid perspiciatis libero nobis rem numquam nesciunt alias sapiente minus voluptatem, reiciendis consequuntur optio dolorem!",
   },
   {
-    imagen: "image/doc-3.jpg",
+    imagen: "./image/pic-3.png",
     nombre: "walter queijeiro",
     rating:
       '<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> ',
