@@ -930,6 +930,10 @@ section:nth-child(even) {
 
 
 /* media queries  */
+
+
+
+
 @media (max-width:991px) {
 
     html {
@@ -980,27 +984,31 @@ section:nth-child(even) {
         margin: 2.5rem;
     }
 
+    .busqueda-receta{
+        grid-gap:10px
+      }
+  
+      .recetario.global form {
+        max-width: 500px;
+      }
+      .recetario.global form input{
+        padding: 10px;
+        font-size: 2rem;
+      }
+
 }
 
-@media (max-width:450px) {
+@media (max-width:350px) {
 
     html {
-        font-size: 50%;
-        width: 450px;
+        font-size: 40%;
+        width: 350px;
     }
 
+    #busqueda{
+        width: 320px;
+    }
 }
 
-@media (max-width: 768px){
-    .busqueda-receta{
-      grid-gap:10px
-    }
 
-    .recetario.global form {
-      max-width: 500px;
-    }
-    .recetario.global form input{
-      padding: 10px;
-      font-size: 2rem;
-    }
-  }
+

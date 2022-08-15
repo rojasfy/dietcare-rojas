@@ -11,6 +11,51 @@ window.onscroll = () => {
   navbar.classList.remove("active");
 };
 
+/* inicio seccion iconos */
+
+const cajaiconos = document.getElementById("box-iconos");
+
+const dataiconos = [
+  {
+    icono: "fas fa-user-md",
+    numero: "20+",
+    titulo: "nutricionistas",
+  },
+  {
+    icono: "fas fa-users",
+    numero: "300+",
+    titulo: "pacientes satisfechos",
+  },
+  {
+    icono: "fas fa-utensils",
+    numero: "900+",
+    titulo: "recetas y alimentos",
+  },
+  {
+    icono: "fas fa-store-alt",
+    numero: "10+",
+    titulo: "tiendas saludables",
+  },
+];
+
+generarHTMLicon(dataiconos);
+
+function generarHTMLicon(iconos) {
+  let generarHTMLicon = "";
+  iconos.map((icono) => {
+    generarHTMLicon += `
+    <div class="icons">
+    <i class="${icono.icono}"></i>
+    <h3>${icono.numero}</h3>
+    <p>${icono.titulo}</p>
+  </div>
+    `;
+  });
+  cajaiconos.innerHTML = generarHTMLicon;
+}
+
+/* fin seccion iconos */
+
 /* inicio seccion servicios */
 
 const cajaservicios = document.getElementById("box-services");
