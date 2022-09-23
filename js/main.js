@@ -353,6 +353,7 @@ async function fetchAPI() {
   const baseURL = `https://api.edamam.com/search?q=${busquedaQuery}&app_id=${APP_ID}&app_key=${APP_key}&from=0&to=20`;
   const response = await fetch(baseURL);
   const data = await response.json();
+  console.log(data);
   generarHTML(data.hits);
   console.log(data.hits);
 }
